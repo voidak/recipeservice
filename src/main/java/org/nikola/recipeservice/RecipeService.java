@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -20,10 +21,10 @@ public class RecipeService {
   @GET
   @Path("all")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getAllRecipes() {
+  public Response getAllRecipes(@QueryParam("category") final String category) {
     Response response = null;
     try {
-      final List<Recipe> allRecipes = recipeRepository.getRecipes();
+      final List<Recipe> allRecipes = recipeRepository.getRecipes(category);
       response = Response.ok(allRecipes).build();
     } catch (final Exception e) {
       response = Response.serverError().build();

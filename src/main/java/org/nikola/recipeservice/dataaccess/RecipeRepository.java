@@ -2,6 +2,7 @@ package org.nikola.recipeservice.dataaccess;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
 
@@ -29,8 +30,12 @@ public class RecipeRepository {
     }
   }
 
-  public List<Recipe> getRecipes() {
-    return this.recipes;
+  public List<Recipe> getRecipes(final String category) {
+    return (category == null || category.trim().isEmpty())
+        ? this.recipes
+        : this.recipes.stream()
+            .filter(r -> r.getHead().getCategories().getCat().contains(category))
+            .collect(Collectors.toList());
   }
 
 }
