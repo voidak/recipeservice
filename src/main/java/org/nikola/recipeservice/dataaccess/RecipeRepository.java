@@ -58,4 +58,14 @@ public class RecipeRepository {
     return distinctCateogries;
   }
 
+  public void saveRecipe(final Recipe recipe) throws IllegalArgumentException {
+    final List<Recipe> existingRecipes = recipes.stream()
+        .filter(r -> r.getHead().getTitle().equals(recipe.getHead().getTitle()))
+        .collect(Collectors.toList());
+    if (existingRecipes.size() > 0) {
+      throw new IllegalArgumentException("A recipe with the same title already exists");
+    }
+    recipes.add(recipe);
+  }
+
 }
