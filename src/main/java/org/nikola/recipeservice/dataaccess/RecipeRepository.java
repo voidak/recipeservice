@@ -10,14 +10,22 @@ import org.nikola.recipeservice.domain.Recipeml.Recipe;
 
 public class RecipeRepository {
 
-  final List<Recipe> recipes = new ArrayList<>();
+  private List<Recipe> recipes = new ArrayList<>();
   private static RecipeRepository single_instance = null;
+
+  public void setRecipes(final List<Recipe> recipes) {
+    this.recipes = recipes;
+  }
 
   public static RecipeRepository getInstance(final XmlRecipeLoader xmlRecipeLoader) {
     if (single_instance == null) {
       single_instance = new RecipeRepository(xmlRecipeLoader);
     }
     return single_instance;
+  }
+
+  public RecipeRepository() {
+
   }
 
   public RecipeRepository(final XmlRecipeLoader xmlRecipeLoader) {
