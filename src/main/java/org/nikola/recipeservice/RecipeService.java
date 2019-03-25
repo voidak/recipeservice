@@ -38,8 +38,8 @@ public class RecipeService {
   public Response getCategories() {
     Response response = null;
     try {
-      final String testResponse = "Test response";
-      response = Response.ok(testResponse).build();
+      final List<String> distinctCategories = recipeRepository.getDistinctCategories();
+      response = Response.ok(distinctCategories).build();
     } catch (final Exception e) {
       response = Response.serverError().build();
     }

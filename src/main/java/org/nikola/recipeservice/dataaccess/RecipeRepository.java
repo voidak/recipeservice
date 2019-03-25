@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.JAXBException;
 
 import org.nikola.recipeservice.domain.Recipeml.Recipe;
+import org.nikola.recipeservice.domain.Recipeml.Recipe.Head.Categories;
 
 public class RecipeRepository {
 
@@ -44,6 +45,17 @@ public class RecipeRepository {
         : this.recipes.stream()
             .filter(r -> r.getHead().getCategories().getCat().contains(category))
             .collect(Collectors.toList());
+  }
+
+  public List<String> getDistinctCategories() {
+    final List<Categories> categories = recipes.stream().map(r -> r.getHead().getCategories()).collect(Collectors.toList());
+    final List<String> allCateogries = new ArrayList<>();
+    for (final Categories cat : categories) {
+      allCateogries.addAll(cat.getCat().stream().collect(Collectors.toList()));
+    }
+    final List<String> distinctCateogries = new ArrayList<>();
+    distinctCateogries.addAll(allCateogries.stream().distinct().collect(Collectors.toList()));
+    return distinctCateogries;
   }
 
 }

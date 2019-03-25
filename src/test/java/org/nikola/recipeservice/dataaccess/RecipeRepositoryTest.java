@@ -16,21 +16,8 @@ public class RecipeRepositoryTest {
   @Test
   public void testGetRecipes_multipleInputs_outputOK() {
     final RecipeRepository recipeRepository = new RecipeRepository();
-    final List<Recipe> recipes = new ArrayList<>();
 
-    final Recipe recipe1 = new Recipe();
-    recipe1.setHead(new Head());
-    recipe1.getHead().setCategories(new Categories());
-    recipe1.getHead().getCategories().getCat().addAll(Arrays.asList("Cat1","Cat2","Cat3"));
-    recipes.add(recipe1);
-
-    final Recipe recipe2 = new Recipe();
-    recipe2.setHead(new Head());
-    recipe2.getHead().setCategories(new Categories());
-    recipe2.getHead().getCategories().getCat().addAll(Arrays.asList("Cat3","Cat4","Cat5"));
-    recipes.add(recipe2);
-
-    recipeRepository.setRecipes(recipes);
+    recipeRepository.setRecipes(getSampleRecipes());
 
     assertEquals(2, recipeRepository.getRecipes(null).size());
     assertEquals(2, recipeRepository.getRecipes("").size());
@@ -38,6 +25,31 @@ public class RecipeRepositoryTest {
     assertEquals(1, recipeRepository.getRecipes("Cat1").size());
     assertEquals(2, recipeRepository.getRecipes("Cat3").size());
     assertEquals(1, recipeRepository.getRecipes("Cat5").size());
+  }
+
+  @Test
+  public void testGetDistinctCategories_outputOK() {
+    final RecipeRepository recipeRepository = new RecipeRepository();
+    recipeRepository.setRecipes(getSampleRecipes());
+    assertEquals(5, recipeRepository.getDistinctCategories().size());
+  }
+
+  private List<Recipe> getSampleRecipes() {
+    final List<Recipe> recipes = new ArrayList<>();
+
+    final Recipe recipe1 = new Recipe();
+    recipe1.setHead(new Head());
+    recipe1.getHead().setCategories(new Categories());
+    recipe1.getHead().getCategories().getCat().addAll(Arrays.asList("Cat1", "Cat2", "Cat3"));
+    recipes.add(recipe1);
+
+    final Recipe recipe2 = new Recipe();
+    recipe2.setHead(new Head());
+    recipe2.getHead().setCategories(new Categories());
+    recipe2.getHead().getCategories().getCat().addAll(Arrays.asList("Cat3", "Cat4", "Cat5"));
+    recipes.add(recipe2);
+
+    return recipes;
   }
 
 }
