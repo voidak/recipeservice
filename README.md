@@ -11,7 +11,6 @@ Technologies used in this project:
  - Tomcat 9
  - Maven 3
  - JUnit 4.8.2
- - Packaged with Maven 3 "package"-feature as a war-file
 
 # API
    
