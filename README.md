@@ -7,11 +7,33 @@ Technologies used in this project:
 
  - Jersey 2.28/ JAX-RS 2.1
  - Json/Jackson 2.28 
- - Java SDK 8
+ - Java 8
  - Tomcat 9
  - Maven 3
  - JUnit 4.8.2
 
+
+# Running
+   
+## Prerequisites
+  
+ - Maven is installed 
+ - Web server, such as Tomcat 
+  
+## Steps
+ 
+ 1 Navigate to the location where you want to have the project
+ 2 Run the following commant to download the project
+	git clone https://github.com/voidak/recipeservice.git
+ 3 Now navigate inside the project folder
+ 4 Run the following command to generate the *.war file
+	mvn install
+ 5 The project is building and the Unit Test status can be monitored in the command line output
+ 6 Inside the project folder ther will be a /target folder and a *.war file inside it
+ 7 Use a web server (for example Tomcat) to run the *.war file.
+ 8 The web service is now running, by default, on http://localhost:8080/ 
+
+ 
 # API
    
 ## Get all recipes
